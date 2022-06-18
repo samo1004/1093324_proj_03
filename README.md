@@ -9,10 +9,11 @@
 >附件input.txt、output.txt
 ## 程式運作 :
 1. register file使用F0~F5，rat一樣
-2. 等待cycle為 ADD: 2 SUB: 2 MUL: 4 DIV: 8
-3. execute完的下個cycle write back
-4. 可同時write back和capture(拿來用)
-5. alu一做完事就檢查有沒有rs已經ready，可以進去execute
+2. 初始F0~F5為0、0、2、4、6、8
+3. 等待cycle為 ADD: 2 SUB: 2 MUL: 4 DIV: 8
+4. execute完的下個cycle write back
+5. 可同時write back和capture(拿來用)
+6. alu一做完事就檢查有沒有rs已經ready，可以進去execute
 ## 變數說明 :
 >各種存放data的容器，說明如註解
 ```cpp
