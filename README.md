@@ -35,3 +35,31 @@ for (int i = 0; i < in.size(); i++) //把instruction分割成vector of string
         IQ.push(temp_vec); //把vector of string存入IQ
     }
 ```
+>各種存放data的容器
+```cpp
+// containers for all the data
+struct RS
+{
+    string o1;
+    string o2;
+    string rd;
+    string Operator;
+    int o1v; // operand1 value
+    int o2v; // operan2 value
+    bool empty()
+    {
+        return o1 == "" && o2 == "";
+    }
+};
+struct ALU
+{
+    int cd;  // execute waiting time
+    int rsn; // which rs
+};
+
+RS rs[5]; // 0~2(+-),3~4(*/)
+ALU alu[2];
+int rat[6] = {emp, emp, emp, emp, emp, emp}; //先把rat弄成沒放東西//之後會放rs數字
+int rf[6] = {0, 0, 2, 4, 6, 8};              //先把rf initialize//但F0=0
+queue<vector<string>> IQ;
+```
