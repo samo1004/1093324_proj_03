@@ -6,8 +6,8 @@
 ## 輸入輸出 :
 附件input.txt、output.txt
 ## 限制 :
-##### register file使用F0~F5，rat一樣
-##### 等待cycle為 ADD:2 SUB:2 MUL:4 DIV:8
+#### register file使用F0~F5，rat一樣
+#### 等待cycle為 ADD:2 SUB:2 MUL:4 DIV:8
 ## 程式碼解說 :
 
 
