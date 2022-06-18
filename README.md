@@ -8,7 +8,30 @@
 ## 限制 :
 1. register file使用F0~F5，rat一樣
 2. 等待cycle為 ADD: 2 SUB: 2 MUL: 4 DIV: 8
-3. 
+3. execute完的下個cycle write back
+4. 可同時write back和capture(拿來用)
+5. alu一做完事就檢查有沒有rs已經ready，可以進去execute
 ## 程式碼解說 :
-
-
+>先將讀入的instruction分割，存入queue中
+```cpp
+for (int i = 0; i < in.size(); i++) //把instruction分割成vector of string
+    {
+        temp_vec.clear();
+        for (int j = 0; j < in[i].size(); j++)
+        {
+            if ((!isalnum(in[i][j]) && in[i][j] != '-'))
+                continue;
+            else
+            {
+                tmp += in[i][j];
+                if (!isalnum(in[i][j + 1]))
+                {
+                    temp_vec.push_back(tmp);
+                    tmp = "";
+                    continue;
+                }
+            }
+        }
+        IQ.push(temp_vec); //把vector of string存入IQ
+    }
+```
