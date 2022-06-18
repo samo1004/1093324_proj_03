@@ -135,28 +135,45 @@ int main()
         else if (alu[0].cd == 0) //做完ㄌ且不為空
         {
             //更新rf
+            int wb = 0;
             // cout << "alu[0] done and wb" << endl;
             if (rs[alu[0].rsn].Operator == "ADDI")
             {
-                rf[stoi(rs[alu[0].rsn].rd.substr(1))] = rs[alu[0].rsn].o1v + rs[alu[0].rsn].o2v;
+                // rf[stoi(rs[alu[0].rsn].rd.substr(1))]
+                wb = rs[alu[0].rsn].o1v + rs[alu[0].rsn].o2v;
             }
             else if (rs[alu[0].rsn].Operator == "ADD")
             {
-                rf[stoi(rs[alu[0].rsn].rd.substr(1))] = rs[alu[0].rsn].o1v + rs[alu[0].rsn].o2v;
+                // rf[stoi(rs[alu[0].rsn].rd.substr(1))]
+                wb = rs[alu[0].rsn].o1v + rs[alu[0].rsn].o2v;
             }
             else if (rs[alu[0].rsn].Operator == "SUB")
             {
-                rf[stoi(rs[alu[0].rsn].rd.substr(1))] = rs[alu[0].rsn].o1v - rs[alu[0].rsn].o2v;
+                // rf[stoi(rs[alu[0].rsn].rd.substr(1))]
+                wb = rs[alu[0].rsn].o1v - rs[alu[0].rsn].o2v;
             }
+
             //處理rat
             //(如果這個rs)跟(這個rs的rd對應到的rf對應到的rat)相同->清掉rat
             //如果不是->不用動
             //
             if (alu[0].rsn == rat[stoi(rs[alu[0].rsn].rd.substr(1))])
             {
+                rf[stoi(rs[alu[0].rsn].rd.substr(1))] = wb;
                 rat[stoi(rs[alu[0].rsn].rd.substr(1))] = emp;
             }
 
+            for (int i = 0; i < 5; i++)
+            {
+                if (rs[i].o1 == rs[alu[0].rsn].rd)
+                {
+                    rs[i].o1v = wb;
+                }
+                if (rs[i].o2 == rs[alu[0].rsn].rd)
+                {
+                    rs[i].o2v = wb;
+                }
+            }
             //清掉rs
             rs[alu[0].rsn].o1 = "";
             rs[alu[0].rsn].o2 = "";
@@ -178,14 +195,17 @@ int main()
         }
         else if (alu[1].cd == 0) //做完ㄌ且不為空
         {
+            int wb = 0;
             // cout << "alu[1] done and wb" << endl;
             if (rs[alu[1].rsn].Operator == "MUL")
             {
-                rf[stoi(rs[alu[1].rsn].rd.substr(1))] = rs[alu[1].rsn].o1v * rs[alu[1].rsn].o2v;
+                // rf[stoi(rs[alu[1].rsn].rd.substr(1))]
+                wb = rs[alu[1].rsn].o1v * rs[alu[1].rsn].o2v;
             }
             else if (rs[alu[1].rsn].Operator == "DIV")
             {
-                rf[stoi(rs[alu[1].rsn].rd.substr(1))] = rs[alu[1].rsn].o1v / rs[alu[1].rsn].o2v;
+                // rf[stoi(rs[alu[1].rsn].rd.substr(1))]
+                wb = rs[alu[1].rsn].o1v / rs[alu[1].rsn].o2v;
             }
 
             //處理rat
@@ -194,7 +214,20 @@ int main()
             //
             if (alu[1].rsn == rat[stoi(rs[alu[1].rsn].rd.substr(1))])
             {
+                rf[stoi(rs[alu[1].rsn].rd.substr(1))] = wb;
                 rat[stoi(rs[alu[1].rsn].rd.substr(1))] = emp;
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (rs[i].o1 == rs[alu[1].rsn].rd)
+                {
+                    rs[i].o1v = wb;
+                }
+                if (rs[i].o2 == rs[alu[1].rsn].rd)
+                {
+                    rs[i].o2v = wb;
+                }
             }
             //清掉rs
             rs[alu[1].rsn].o1 = "";
@@ -262,7 +295,7 @@ int main()
         // dispatch
         if (alu[0].rsn == emp) // if alu for +- is free
         {
-            for (int i = 0; i < 3;)
+            for (int i = 0; i < 3; i++)
             {
                 // cout << "i =" << i;
                 if (rs[i].o1v != emp && rs[i].o2v != emp) //+-, if ready(2 value exist), mark down that this rs enter it
@@ -272,8 +305,6 @@ int main()
                     alu[0].cd = 2; // both + and - do 2 cycle
                     break;
                 }
-                else
-                    i++;
             }
         }
 
@@ -390,10 +421,6 @@ int main()
                 rs[i].o2v = 0;
                 // cout << "rs[1].o2v = " << rs[i].o2v << endl;
             }
-            // if (rat[stoi(rs[i].o1.substr(1))] == emp)
-            //     rs[i].o1v = rf[stoi(rs[i].o1.substr(1))];
-            // if (rat[stoi(rs[i].o2.substr(1))] == emp)
-            //     rs[i].o2v = rf[stoi(rs[i].o2.substr(1))];
         }
         // issue done
         if (modified) // print
@@ -421,7 +448,7 @@ int main()
                     cout << rs[alu[i].rsn].Operator << " " << rs[alu[i].rsn].o1 << " " << (rs[alu[i].rsn].o2 == "" ? to_string(rs[alu[i].rsn].o2v) : rs[alu[i].rsn].o2) << "\n";
                 else
                     cout << "null\n";
-                // cout << "cd: " << fixed << setw(4) << pm(alu[i].cd) << ", rsn: " << pm(alu[i].rsn) << "\n";
+                cout << "cd: " << fixed << setw(4) << pm(alu[i].cd) << ", rsn: " << pm(alu[i].rsn) << "\n";
             }
             // cout << endl;
             cout << "======================\n";
