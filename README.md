@@ -1,6 +1,6 @@
 # 1093324_proj_3
 
-##影片連結 :
+## 影片連結 :
 待補
 ## 執行方式 :
 >先在和cpp檔同個資料夾下建立空白的input.txt、output.txt，將附件中的input.txt內容複製過去，執行過後將會把輸出印到output.txt中
