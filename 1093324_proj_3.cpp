@@ -104,19 +104,8 @@ int main()
         }
         IQ.push(temp_vec); //把vector of string存入IQ
     }
-    int st = IQ.size();
-    while (st--) //印出來再塞會去
-    {
-        vector<string> temp = IQ.front();
-        IQ.pop();
-        for (int i = 0; i < temp.size(); i++)
-        {
-            cout << temp[i] << " ";
-        }
-        cout << endl;
-        IQ.push(temp);
-    }
-    cout << "======================\n";
+
+    cout << "start\n";
     // complete read in datas
     // start running
     int rsemp = 0;
