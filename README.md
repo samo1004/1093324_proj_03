@@ -11,37 +11,14 @@
 3. execute完的下個cycle write back
 4. 可同時write back和capture(拿來用)
 5. alu一做完事就檢查有沒有rs已經ready，可以進去execute
-## 程式碼解說 :
->先將讀入的instruction分割，存入queue中
-```cpp
-for (int i = 0; i < in.size(); i++) //把instruction分割成vector of string
-    {
-        temp_vec.clear();
-        for (int j = 0; j < in[i].size(); j++)
-        {
-            if ((!isalnum(in[i][j]) && in[i][j] != '-'))
-                continue;
-            else
-            {
-                tmp += in[i][j];
-                if (!isalnum(in[i][j + 1]))
-                {
-                    temp_vec.push_back(tmp);
-                    tmp = "";
-                    continue;
-                }
-            }
-        }
-        IQ.push(temp_vec); //把vector of string存入IQ
-    }
-```
->各種存放data的容器
+## 變數說明 :
+>各種存放data的容器，說明如註解
 ```cpp
 // containers for all the data
 struct RS
 {
-    string o1;
-    string o2;
+    string o1;//operand 1
+    string o2;//operand 2
     string rd;
     string Operator;
     int o1v; // operand1 value
@@ -54,12 +31,12 @@ struct RS
 struct ALU
 {
     int cd;  // execute waiting time
-    int rsn; // which rs
+    int rsn; // which rs is doing now
 };
 
 RS rs[5]; // 0~2(+-),3~4(*/)
 ALU alu[2];
 int rat[6] = {emp, emp, emp, emp, emp, emp}; //先把rat弄成沒放東西//之後會放rs數字
 int rf[6] = {0, 0, 2, 4, 6, 8};              //先把rf initialize//但F0=0
-queue<vector<string>> IQ;
+queue<vector<string>> IQ;//instruction queue
 ```
