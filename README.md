@@ -5,7 +5,9 @@
 (注意: 檔名就是input跟output，輸入格式、大小寫等和網站上相同)
 ## 輸入輸出 :
 附件input.txt、output.txt
-
+## 限制 :
+### register file使用F0~F5，rat一樣
+### 等待cycle為 ADD:2 SUB:2 MUL:4 DIV:8
 ## 程式碼解說 :
 
 
