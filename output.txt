@@ -8,11 +8,11 @@ rf3:    4 | rat3: null
 rf4:    6 | rat4: null
 rf5:    8 | rat5: null
 
-rs0:  + F1 2
-rs1:  null
-rs2:  null
-rs3:  null
-rs4:  null
+rs0: ADDI 2 1 
+rs1: empty
+rs2: empty
+rs3: empty
+rs4: empty
 
 alu0: null
 cd: null, rsn: null
@@ -22,19 +22,19 @@ cd: null, rsn: null
 cycle 2
 
 rf0:    0 | rat0: null
-rf1:    0 | rat1:  rs0
-rf2:    2 | rat2:  rs1
+rf1:    0 | rat1:  rs1
+rf2:    2 | rat2: null
 rf3:    4 | rat3: null
 rf4:    6 | rat4: null
 rf5:    8 | rat5: null
 
-rs0:  + F1 2
-rs1:  + F2 6
-rs2:  null
-rs3:  null
-rs4:  null
+rs0: ADDI 2 1 
+rs1: SUB 4 6 
+rs2: empty
+rs3: empty
+rs4: empty
 
-alu0: ADDI F1 2
+alu0: ADDI F2 1
 cd:    2, rsn: 0
 alu1: null
 cd: null, rsn: null
@@ -42,177 +42,241 @@ cd: null, rsn: null
 cycle 3
 
 rf0:    0 | rat0: null
-rf1:    0 | rat1:  rs0
-rf2:    2 | rat2:  rs1
-rf3:    4 | rat3:  rs2
+rf1:    0 | rat1:  rs3
+rf2:    2 | rat2: null
+rf3:    4 | rat3: null
 rf4:    6 | rat4: null
 rf5:    8 | rat5: null
 
-rs0:  + F1 2
-rs1:  + F2 6
-rs2:  - F2 F1
-rs3:  null
-rs4:  null
+rs0: ADDI 2 1 
+rs1: SUB 4 6 
+rs2: empty
+rs3: DIV 2 4 
+rs4: empty
 
-alu0: ADDI F1 2
+alu0: ADDI F2 1
 cd:    1, rsn: 0
 alu1: null
 cd: null, rsn: null
 ======================
-cycle 5
+cycle 4
 
 rf0:    0 | rat0: null
-rf1:    2 | rat1: null
-rf2:    2 | rat2:  rs1
-rf3:    4 | rat3:  rs0
+rf1:    0 | rat1:  rs3
+rf2:    2 | rat2:  rs4
+rf3:    4 | rat3: null
 rf4:    6 | rat4: null
 rf5:    8 | rat5: null
 
-rs0:  - F3 F1
-rs1:  + F2 6
-rs2:  - F2 F1
-rs3:  null
-rs4:  null
+rs0: ADDI 2 1 
+rs1: SUB 4 6 
+rs2: empty
+rs3: DIV 2 4 
+rs4: MUL 4 6 
 
-alu0: ADDI F2 6
+alu0: ADDI F2 1
+cd:    0, rsn: 0
+alu1: DIV F2 F3
+cd:    8, rsn: 3
+======================
+cycle 5
+
+rf0:    0 | rat0: null
+rf1:    0 | rat1:  rs3
+rf2:    2 | rat2:  rs0
+rf3:    4 | rat3: null
+rf4:    6 | rat4: null
+rf5:    8 | rat5: null
+
+rs0: ADD 6 rs4 
+rs1: SUB 4 6 
+rs2: empty
+rs3: DIV 2 4 
+rs4: MUL 4 6 
+
+alu0: SUB F3 F4
 cd:    2, rsn: 1
-alu1: null
-cd: null, rsn: null
+alu1: DIV F2 F3
+cd:    7, rsn: 3
 ======================
 cycle 6
 
 rf0:    0 | rat0: null
-rf1:    2 | rat1: null
-rf2:    2 | rat2:  rs1
-rf3:    4 | rat3:  rs0
-rf4:    6 | rat4:  rs3
+rf1:    0 | rat1:  rs3
+rf2:    2 | rat2:  rs0
+rf3:    4 | rat3: null
+rf4:    6 | rat4:  rs2
 rf5:    8 | rat5: null
 
-rs0:  - F3 F1
-rs1:  + F2 6
-rs2:  - F2 F1
-rs3:  / F2 F3
-rs4:  null
+rs0: ADD 6 rs4 
+rs1: SUB 4 6 
+rs2: ADDI rs3 2 
+rs3: DIV 2 4 
+rs4: MUL 4 6 
 
-alu0: ADDI F2 6
+alu0: SUB F3 F4
 cd:    1, rsn: 1
-alu1: null
-cd: null, rsn: null
-======================
-cycle 7
-
-rf0:    0 | rat0: null
-rf1:    2 | rat1: null
-rf2:    2 | rat2:  rs1
-rf3:    4 | rat3:  rs0
-rf4:    6 | rat4:  rs3
-rf5:    8 | rat5:  rs4
-
-rs0:  - F3 F1
-rs1:  + F2 6
-rs2:  - F2 F1
-rs3:  / F2 F3
-rs4:  * F2 F4
-
-alu0: ADDI F2 6
-cd:    0, rsn: 1
-alu1: null
-cd: null, rsn: null
+alu1: DIV F2 F3
+cd:    6, rsn: 3
 ======================
 cycle 8
 
 rf0:    0 | rat0: null
-rf1:    2 | rat1: null
-rf2:    8 | rat2: null
-rf3:    4 | rat3:  rs0
-rf4:    6 | rat4:  rs3
-rf5:    8 | rat5:  rs4
+rf1:    0 | rat1:  rs3
+rf2:    2 | rat2:  rs0
+rf3:    4 | rat3: null
+rf4:    6 | rat4:  rs2
+rf5:    8 | rat5: null
 
-rs0:  - F3 F1
-rs1:  null
-rs2:  - F2 F1
-rs3:  / F2 F3
-rs4:  * F2 F4
+rs0: ADD 6 rs4 
+rs1: empty
+rs2: ADDI rs3 2 
+rs3: DIV 2 4 
+rs4: MUL 4 6 
 
-alu0: SUB F2 F1
-cd:    2, rsn: 2
-alu1: null
+alu0: null
 cd: null, rsn: null
+alu1: DIV F2 F3
+cd:    4, rsn: 3
 ======================
-cycle 11
+update rs2 o1v to 0
+cycle 13
 
 rf0:    0 | rat0: null
-rf1:    2 | rat1: null
-rf2:    8 | rat2: null
-rf3:    4 | rat3:  rs0
-rf4:    6 | rat4:  rs3
-rf5:    8 | rat5:  rs4
+rf1:    0 | rat1: null
+rf2:    2 | rat2:  rs0
+rf3:    4 | rat3: null
+rf4:    6 | rat4:  rs2
+rf5:    8 | rat5:  rs3
 
-rs0:  - F3 F1
-rs1:  null
-rs2:  null
-rs3:  / F2 F3
-rs4:  * F2 F4
+rs0: ADD 6 rs4 
+rs1: empty
+rs2: ADDI 0 2 
+rs3: MUL 8 8 
+rs4: MUL 4 6 
 
-alu0: SUB F3 F1
-cd:    2, rsn: 0
-alu1: DIV F2 F3
-cd:    8, rsn: 3
+alu0: ADDI rs3 2
+cd:    2, rsn: 2
+alu1: MUL F3 F4
+cd:    4, rsn: 4
 ======================
 cycle 14
 
 rf0:    0 | rat0: null
-rf1:    2 | rat1: null
-rf2:    8 | rat2: null
+rf1:    0 | rat1:  rs1
+rf2:    2 | rat2:  rs0
 rf3:    4 | rat3: null
-rf4:    6 | rat4:  rs3
-rf5:    8 | rat5:  rs4
+rf4:    6 | rat4:  rs2
+rf5:    8 | rat5:  rs3
 
-rs0:  null
-rs1:  null
-rs2:  null
-rs3:  / F2 F3
-rs4:  * F2 F4
+rs0: ADD 6 rs4 
+rs1: ADD rs2 rs2 
+rs2: ADDI 0 2 
+rs3: MUL 8 8 
+rs4: MUL 4 6 
+
+alu0: ADDI rs3 2
+cd:    1, rsn: 2
+alu1: MUL F3 F4
+cd:    3, rsn: 4
+======================
+update rs1 o1v to 2
+update rs1 o2v to 2
+cycle 16
+
+rf0:    0 | rat0: null
+rf1:    0 | rat1:  rs1
+rf2:    2 | rat2:  rs0
+rf3:    4 | rat3: null
+rf4:    2 | rat4: null
+rf5:    8 | rat5:  rs3
+
+rs0: ADD 6 rs4 
+rs1: ADD 2 2 
+rs2: empty
+rs3: MUL 8 8 
+rs4: MUL 4 6 
+
+alu0: ADD rs2 rs2
+cd:    2, rsn: 1
+alu1: MUL F3 F4
+cd:    1, rsn: 4
+======================
+update rs0 o2v to 24
+cycle 18
+
+rf0:    0 | rat0: null
+rf1:    0 | rat1:  rs1
+rf2:    2 | rat2:  rs0
+rf3:    4 | rat3: null
+rf4:    2 | rat4: null
+rf5:    8 | rat5:  rs3
+
+rs0: ADD 6 24 
+rs1: ADD 2 2 
+rs2: empty
+rs3: MUL 8 8 
+rs4: empty
+
+alu0: ADD rs2 rs2
+cd:    0, rsn: 1
+alu1: MUL F5 F5
+cd:    4, rsn: 3
+======================
+cycle 19
+
+rf0:    0 | rat0: null
+rf1:    4 | rat1: null
+rf2:    2 | rat2:  rs0
+rf3:    4 | rat3: null
+rf4:    2 | rat4: null
+rf5:    8 | rat5:  rs3
+
+rs0: ADD 6 24 
+rs1: empty
+rs2: empty
+rs3: MUL 8 8 
+rs4: empty
+
+alu0: ADD F4 rs4
+cd:    2, rsn: 0
+alu1: MUL F5 F5
+cd:    3, rsn: 3
+======================
+cycle 22
+
+rf0:    0 | rat0: null
+rf1:    4 | rat1: null
+rf2:   30 | rat2: null
+rf3:    4 | rat3: null
+rf4:    2 | rat4: null
+rf5:    8 | rat5:  rs3
+
+rs0: empty
+rs1: empty
+rs2: empty
+rs3: MUL 8 8 
+rs4: empty
 
 alu0: null
 cd: null, rsn: null
-alu1: DIV F2 F3
-cd:    5, rsn: 3
+alu1: MUL F5 F5
+cd:    0, rsn: 3
 ======================
-cycle 20
+cycle 23
 
 rf0:    0 | rat0: null
-rf1:    2 | rat1: null
-rf2:    8 | rat2: null
+rf1:    4 | rat1: null
+rf2:   30 | rat2: null
 rf3:    4 | rat3: null
 rf4:    2 | rat4: null
-rf5:    8 | rat5:  rs4
+rf5:   64 | rat5: null
 
-rs0:  null
-rs1:  null
-rs2:  null
-rs3:  null
-rs4:  * F2 F4
-
-alu0: null
-cd: null, rsn: null
-alu1: MUL F2 F4
-cd:    4, rsn: 4
-======================
-cycle 25
-
-rf0:    0 | rat0: null
-rf1:    2 | rat1: null
-rf2:    8 | rat2: null
-rf3:    4 | rat3: null
-rf4:    2 | rat4: null
-rf5:   16 | rat5: null
-
-rs0:  null
-rs1:  null
-rs2:  null
-rs3:  null
-rs4:  null
+rs0: empty
+rs1: empty
+rs2: empty
+rs3: empty
+rs4: empty
 
 alu0: null
 cd: null, rsn: null
