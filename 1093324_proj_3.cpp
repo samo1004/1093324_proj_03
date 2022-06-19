@@ -156,22 +156,25 @@ int main()
             {
                 if (alu[0].rsn == rat[i])
                 {
-                    rf[stoi(rs[alu[0].rsn].rd.substr(1))] = wb;
+                    rf[i] = wb;
                     rat[i] = emp;
                 }
             }
 
-            for (int i = 0; i < 5; i++)
-            {
-                if (rs[i].o1 == rs[alu[0].rsn].rd)
-                {
-                    rs[i].o1v = wb;
-                }
-                if (rs[i].o2 == rs[alu[0].rsn].rd)
-                {
-                    rs[i].o2v = wb;
-                }
-            }
+            // for (int i = 0; i < 5; i++)
+            // {
+            //     for (int j = 0; j < 6; j++)
+            //     {
+            //         if (rs[i].o1 == "F" + to_string(i))
+            //         {
+            //             rs[i].o1v = wb;
+            //         }
+            //         if (rs[i].o2 == "F" + to_string(i))
+            //         {
+            //             rs[i].o2v = wb;
+            //         }
+            //     }
+            // }
             //清掉rs
             rs[alu[0].rsn].o1 = "";
             rs[alu[0].rsn].o2 = "";
@@ -219,22 +222,25 @@ int main()
             {
                 if (alu[1].rsn == rat[i])
                 {
-                    rf[stoi(rs[alu[1].rsn].rd.substr(1))] = wb;
+                    rf[i] = wb;
                     rat[i] = emp;
                 }
             }
 
-            for (int i = 0; i < 5; i++)
-            {
-                if (rs[i].o1 == rs[alu[1].rsn].rd)
-                {
-                    rs[i].o1v = wb;
-                }
-                if (rs[i].o2 == rs[alu[1].rsn].rd)
-                {
-                    rs[i].o2v = wb;
-                }
-            }
+            // for (int i = 0; i < 5; i++)
+            // {
+            //     for (int j = 0; j < 6; j++)
+            //     {
+            //         if (rs[i].o1 == "F" + to_string(j))
+            //         {
+            //             rs[i].o1v = wb;
+            //         }
+            //         if (rs[i].o2 == "F" + to_string(j))
+            //         {
+            //             rs[i].o2v = wb;
+            //         }
+            //     }
+            // }
             //清掉rs
             rs[alu[1].rsn].o1 = "";
             rs[alu[1].rsn].o2 = "";
@@ -252,38 +258,45 @@ int main()
         // execute done
 
         // capture
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
-            if (rs[i].Operator == "")
-            {
+            if (rs[i].empty())
                 continue;
-            }
-            if (rs[i].Operator == "ADDI")
+            else
             {
-                if (rat[stoi(rs[i].o1.substr(1))] == emp)
-                    rs[i].o1v = rf[stoi(rs[i].o1.substr(1))];
-            }
-            else if (rs[i].Operator == "ADD" || rs[i].Operator == "SUB")
-            {
-                if (rat[stoi(rs[i].o1.substr(1))] == emp)
-                    rs[i].o1v = rf[stoi(rs[i].o1.substr(1))];
-                if (rat[stoi(rs[i].o2.substr(1))] == emp)
-                    rs[i].o2v = rf[stoi(rs[i].o2.substr(1))];
-            }
-        }
-        for (int i = 3; i < 5; i++)
-        {
-            if (rs[i].Operator == "")
-            {
-                continue;
-            }
-
-            if (rs[i].Operator == "MUL" || rs[i].Operator == "DIV")
-            {
-                if (rat[stoi(rs[i].o1.substr(1))] == emp)
-                    rs[i].o1v = rf[stoi(rs[i].o1.substr(1))];
-                if (rat[stoi(rs[i].o2.substr(1))] == emp)
-                    rs[i].o2v = rf[stoi(rs[i].o2.substr(1))];
+                if (rs[i].Operator == "ADDI")
+                {
+                    for (int j = 0; j < 6; j++)
+                    {
+                        if (rs[i].o1 == "F" + to_string(j))
+                        {
+                            if (rs[i].o1v == emp)
+                            {
+                                rs[i].o1v = rf[j];
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < 6; j++)
+                    {
+                        if (rs[i].o1 == "F" + to_string(j))
+                        {
+                            if (rs[i].o1v == emp)
+                            {
+                                rs[i].o1v = rf[j];
+                            }
+                        }
+                        if (rs[i].o2 == "F" + to_string(j))
+                        {
+                            if (rs[i].o2v == emp)
+                            {
+                                rs[i].o2v = rf[j];
+                            }
+                        }
+                    }
+                }
             }
         }
         // capture done
@@ -342,7 +355,7 @@ int main()
                 {
                     for (int i = 0; i < 3; i++)
                     {
-                        if (rs[i].Operator == "") //這格rs(0~2其中一格)是空的
+                        if (rs[i].empty()) //這格rs(0~2其中一格)是空的
                         {
                             rs[i].rd = tmp[1]; //目的地
                             // cout << "----rs" << i << "'s rd= " << rs[i].rd << endl;
@@ -365,7 +378,7 @@ int main()
                 {
                     for (int i = 0; i < 3; i++)
                     {
-                        if (rs[i].Operator == "") //這格rs(0~2其中一格)是空的
+                        if (rs[i].empty()) //這格rs(0~2其中一格)是空的
                         {
                             rs[i].rd = tmp[1]; //目的地
                             // cout << "----rs" << i << "'s rd= " << rs[i].rd << endl;
