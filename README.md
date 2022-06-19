@@ -7,7 +7,7 @@
 (注意: 檔名就是input跟output，輸入格式、大小寫等和網站上相同)
 ## 輸入輸出 :
 >附件input.txt、output.txt
-## 程式運作 :
+## 程式設定 :
 1. register file使用F0~F5，rat一樣
 2. 初始F0~F5為0、0、2、4、6、8
 3. 等待cycle為 ADD: 2 SUB: 2 MUL: 4 DIV: 8
