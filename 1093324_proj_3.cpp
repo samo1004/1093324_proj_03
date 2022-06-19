@@ -146,10 +146,19 @@ int main()
             //(如果這個rs)跟(這個rs的rd對應到的rf對應到的rat)相同->清掉rat
             //如果不是->不用動
             //
-            if (alu[0].rsn == rat[stoi(rs[alu[0].rsn].rd.substr(1))])
+            // if (alu[0].rsn == rat[stoi(rs[alu[0].rsn].rd.substr(1))])
+            // {
+            //     rf[stoi(rs[alu[0].rsn].rd.substr(1))] = wb;
+            //     rat[stoi(rs[alu[0].rsn].rd.substr(1))] = emp;
+            // }
+
+            for (int i = 0; i < 6; i++)
             {
-                rf[stoi(rs[alu[0].rsn].rd.substr(1))] = wb;
-                rat[stoi(rs[alu[0].rsn].rd.substr(1))] = emp;
+                if (alu[0].rsn == rat[i])
+                {
+                    rf[stoi(rs[alu[0].rsn].rd.substr(1))] = wb;
+                    rat[i] = emp;
+                }
             }
 
             for (int i = 0; i < 5; i++)
@@ -201,10 +210,18 @@ int main()
             //(如果這個rs)跟(這個rs的rd對應到的rf對應到的rat)相同->清掉rat
             //如果不是->不用動
             //
-            if (alu[1].rsn == rat[stoi(rs[alu[1].rsn].rd.substr(1))])
+            // if (alu[1].rsn == rat[stoi(rs[alu[1].rsn].rd.substr(1))])
+            // {
+            //     rf[stoi(rs[alu[1].rsn].rd.substr(1))] = wb;
+            //     rat[stoi(rs[alu[1].rsn].rd.substr(1))] = emp;
+            // }
+            for (int i = 0; i < 6; i++)
             {
-                rf[stoi(rs[alu[1].rsn].rd.substr(1))] = wb;
-                rat[stoi(rs[alu[1].rsn].rd.substr(1))] = emp;
+                if (alu[1].rsn == rat[i])
+                {
+                    rf[stoi(rs[alu[1].rsn].rd.substr(1))] = wb;
+                    rat[i] = emp;
+                }
             }
 
             for (int i = 0; i < 5; i++)
