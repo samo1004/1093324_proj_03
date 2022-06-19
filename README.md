@@ -9,7 +9,7 @@
 >附件input.txt、output.txt
 ## 程式設定 :
 1. register file使用F0~F5，rat一樣
-2. 初始F0~F5為0、0、2、4、6、8
+2. 初始F0~F5為0、0、2、4、6、8(如果要改初始值在52行改)
 3. 等待cycle為 ADD: 2 SUB: 2 MUL: 4 DIV: 8
 4. 各容器的index都從0開始算
 5. execute完的下個cycle write back
