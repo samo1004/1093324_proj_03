@@ -11,7 +11,7 @@
 1. register file使用F0~F5，rat一樣
 2. 初始F0~F5為0、0、2、4、6、8(如果要改初始值在52行改)
 ```cpp
-int rf[6] = {0, 0, 2, 4, 6, 8};//
+int rf[6] = {0, 0, 2, 4, 6, 8};//rf0~rf5
 ```
 3. 等待cycle為 ADD: 2 SUB: 2 MUL: 4 DIV: 8
 4. 各容器的index都從0開始算
